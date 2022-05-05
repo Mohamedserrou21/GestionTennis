@@ -26,7 +26,7 @@ namespace TENNIS_APP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            String ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=TENNIS_APP;Trusted_Connection=true;ConnectRetryCount=0";
+            String ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=ATP2;Trusted_Connection=true;ConnectRetryCount=0";
             services.AddDbContext<Context>(options => options.UseSqlServer(ConnectionString));
         }
 

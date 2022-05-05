@@ -20,7 +20,9 @@ namespace TENNIS_APP.Models
         public DbSet<Sponsor> sponsors { get; set; }
         
         public DbSet<Tournoi> Tournois { get; set; }
-        
+        public DbSet<Event> Events { get; set; }
         public DbSet<TENNIS_APP.Models.Subvention> Subvention { get; set; }
+        
+        public DbSet<TENNIS_APP.Models.Ranking> Ranking { get; set; }
     }
 }

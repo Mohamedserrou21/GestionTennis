@@ -28,5 +28,8 @@ namespace TENNIS_APP.Models
         [MaxLength(50)]
         [Column("NATIONALITE")]
         public string Nationalite { get; set; }
+
+      
+        
     }
 }

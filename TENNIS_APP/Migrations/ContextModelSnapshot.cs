@@ -15,9 +15,52 @@ namespace TENNIS_APP.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.23")
+                .HasAnnotation("ProductVersion", "3.1.24")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("TENNIS_APP.Models.Event", b =>
+                {
+                    b.Property<int>("EventID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("EventID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnName("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
+
+                    b.Property<DateTime>("End")
+                        .HasColumnName("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsFullDay")
+                        .HasColumnName("IsFullDay")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnName("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnName("Subject")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("ThemeColor")
+                        .IsRequired()
+                        .HasColumnName("ThemeColor")
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.HasKey("EventID");
+
+                    b.ToTable("Events");
+                });
 
             modelBuilder.Entity("TENNIS_APP.Models.Gain", b =>
                 {
@@ -86,6 +129,36 @@ namespace TENNIS_APP.Migrations
                     b.HasKey("id");
 
                     b.ToTable("joueurs");
+                });
+
+            modelBuilder.Entity("TENNIS_APP.Models.Ranking", b =>
+                {
+                    b.Property<int?>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ID_Player_RANK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RANK_PLAYER")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Rank")
+                        .IsRequired()
+                        .HasColumnName("RANK")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("score")
+                        .HasColumnName("SCORE")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ID_Player_RANK");
+
+                    b.ToTable("RANKING","dbo");
                 });
 
             modelBuilder.Entity("TENNIS_APP.Models.Rencontre", b =>
@@ -237,6 +310,13 @@ namespace TENNIS_APP.Migrations
                         .HasForeignKey("Nom_SPONSOR")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TENNIS_APP.Models.Ranking", b =>
+                {
+                    b.HasOne("TENNIS_APP.Models.Joueur", "Player_Rank")
+                        .WithMany()
+                        .HasForeignKey("ID_Player_RANK");
                 });
 
             modelBuilder.Entity("TENNIS_APP.Models.Rencontre", b =>
